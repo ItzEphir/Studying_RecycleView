@@ -1,8 +1,6 @@
 package com.ephirium.recyclerapplication;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -43,18 +41,12 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     public void addItem(Item item){
         items.add(item);
-        notifyDataSetChanged();
+        notifyItemInserted(getItemCount() - 1);
     }
 
     public void delItem(int pos){
         items.remove(pos);
-        Item.last_id = 0;
-        List<Item> newItems = new ArrayList<>();
-        for(Item item : items){
-            newItems.add(new Item(item.getText()));
-        }
-        items = newItems;
-        notifyDataSetChanged();
+        notifyItemRemoved(pos);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
